@@ -1,6 +1,6 @@
 {
   "name": "async-some",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "short-circuited, asynchronous version of Array.protototype.some",
   "main": "some.js",
   "scripts": {
