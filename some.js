@@ -1,3 +1,6 @@
+var assert     = require("assert")
+var dezalgoify = require("dezalgo")
+
 module.exports = some
 
 /**
@@ -9,23 +12,36 @@ module.exports = some
  * callback. Otherwise, pass the truthy value passed by the predicate, or
  * `false` if no truthy value was passed.
  */
-function some (array, test, cb) {
-  var index  = 0
-    , length = array.length
+function some (list, test, cb) {
+  assert("length" in list, "array must be arraylike")
+  assert.equal(typeof test, "function", "predicate must be callable")
+  assert.equal(typeof cb, "function", "callback must be callable")
+
+  var array   = slice(list)
+    , index   = 0
+    , length  = array.length
+    , hecomes = dezalgoify(cb)
 
   map()
 
   function map () {
-    if (index >= length) return cb(null, false)
+    if (index >= length) return hecomes(null, false)
 
     test(array[index], reduce)
   }
 
-  function reduce (er, value) {
-    if (er) return cb(er, false)
-    if (value) return cb(null, value)
+  function reduce (er, result) {
+    if (er) return hecomes(er, false)
+    if (result) return hecomes(null, result)
 
     index++
     map()
   }
+}
+
+// Array.prototype.slice on arguments arraylike is expensive
+function slice(args) {
+  var l = args.length, a = [], i
+  for (i = 0; i < l; i++) a[i] = args[i]
+  return a
 }
