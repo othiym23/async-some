@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/othiym23/async-some",
   "dependencies": {
-    "dezalgo": "^1.0.0"
+    "dezalgo": "^1.0.2"
   },
   "devDependencies": {
-    "tap": "^0.4.11"
+    "tap": "^1.1.0"
   }
 }
